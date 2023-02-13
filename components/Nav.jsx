@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { auth } from "@/utils/firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
+import { BsDisplayFill } from "react-icons/bs";
 
 export default function Nav() {
   const [user, loading] = useAuthState(auth);
@@ -29,7 +30,7 @@ export default function Nav() {
               <Link href="/dashboard">
                 <img
                   className="w-10 rounded-full cursor-pointer"
-                  src={user.photoURL}
+                  src={!user.photoURL ? <BsDisplayFill /> : user.photoURL}
                   alt={user.displayName}
                 />
               </Link>
