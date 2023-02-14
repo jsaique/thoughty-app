@@ -26,14 +26,14 @@ export default function Post() {
     if (!post.description) {
       toast.error("Description is empty 😇", {
         position: toast.POSITION.TOP_CENTER,
-        autoClose: 1000,
+        autoClose: 1500,
       });
       return;
     }
     if (post.description.length > 300) {
       toast.error("Description too long 😁", {
         position: toast.POSITION.TOP_CENTER,
-        autoClose: 1000,
+        autoClose: 1500,
       });
       return;
     }
@@ -42,6 +42,10 @@ export default function Post() {
       const docRef = doc(db, "posts", post.id);
       const updatedPost = { ...post, timestamp: serverTimestamp() };
       await updateDoc(docRef, updatedPost);
+      toast.success("Post edited!", {
+        position: toast.POSITION.TOP_CENTER,
+        autoClose: 1500,
+      });
       return route.push("/");
     } else {
       //Making a new post
@@ -54,6 +58,10 @@ export default function Post() {
         username: user.displayName,
       });
       setPost({ description: "" });
+      toast.success("Posted!", {
+        position: toast.POSITION.TOP_CENTER,
+        autoClose: 1500,
+      });
       return route.push("/");
     }
   };

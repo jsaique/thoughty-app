@@ -42,7 +42,7 @@ export default function Dashboard() {
     await deleteDoc(docRef);
   };
 
-  //Get users data
+  //Run getData everytime user/loading changes
   useEffect(() => {
     getData();
   }, [user, loading]);
