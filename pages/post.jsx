@@ -48,7 +48,7 @@ export default function Post() {
       });
       return route.push("/");
     } else {
-      //Making a new post
+      //Making a new post (creating post db in firebase)
       const colletionRef = collection(db, "posts");
       await addDoc(colletionRef, {
         ...post,
