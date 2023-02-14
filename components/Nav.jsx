@@ -5,7 +5,6 @@ import { BsDisplayFill } from "react-icons/bs";
 
 export default function Nav() {
   const [user, loading] = useAuthState(auth);
-  console.log(user);
   return (
     <div>
       <nav className="flex justify-between items-center py-10">
@@ -28,11 +27,17 @@ export default function Nav() {
                 </button>
               </Link>
               <Link href="/dashboard">
-                <img
-                  className="w-10 rounded-full cursor-pointer"
-                  src={!user.photoURL ? <BsDisplayFill /> : user.photoURL}
-                  alt={user.displayName}
-                />
+                {!user.photoURL ? (
+                  <button className="w-full p-2 text-lg font-medium rounded-full bg-cyan-500">
+                    Demo
+                  </button>
+                ) : (
+                  <img
+                    className="w-10 rounded-full cursor-pointer"
+                    src={user.photoURL}
+                    alt={user.displayName}
+                  />
+                )}
               </Link>
             </div>
           )}

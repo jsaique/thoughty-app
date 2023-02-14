@@ -1,6 +1,31 @@
+import { useEffect, useState } from "react";
+import { db } from "@/utils/firebase";
 import Head from "next/head";
+import Message from "@/components/message";
+import { collection, onSnapshot, orderBy, query } from "firebase/firestore";
 
 export default function Home() {
+  //Creating the state with all posts
+  const [allPosts, setAllPosts] = useState([]);
+
+  const getPost = async () => {
+    //Collecting the posts
+    const collectionRef = collection(db, "posts");
+    //Query by date
+    const queryByDate = query(collectionRef, orderBy("timestamp", "desc"));
+    //Update data on realtime(snapshot)
+    const unsubscribe = onSnapshot(queryByDate, (snapshot) => {
+      //New array of data of each document (spreading it as object)
+      setAllPosts(snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+    });
+    return unsubscribe;
+  };
+
+  //Running getPost
+  useEffect(() => {
+    getPost();
+  }, []);
+
   return (
     <>
       <Head>
@@ -12,6 +37,9 @@ export default function Home() {
       <div className="my-12 text-lg font-medium">
         <h2>See what other people are saying</h2>
         {/* <Message /> */}
+        {allPosts.map((post) => (
+          <Message {...post} key={post.id} />
+        ))}
       </div>
     </>
   );

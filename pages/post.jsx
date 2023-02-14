@@ -1,6 +1,12 @@
 import { auth, db } from "@/utils/firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
-import { addDoc, collection, serverTimestamp } from "firebase/firestore";
+import {
+  addDoc,
+  collection,
+  doc,
+  serverTimestamp,
+  updateDoc,
+} from "firebase/firestore";
 import { useRouter } from "next/router";
 import { useState, useEffect } from "react";
 import { toast } from "react-toastify";
@@ -10,6 +16,8 @@ export default function Post() {
   const [post, setPost] = useState({ description: "" });
   const [user, loading] = useAuthState(auth);
   const route = useRouter();
+  //Edit will pull data from route
+  const routeData = route.query;
   //Submit post
   const submitPost = async (e) => {
     e.preventDefault();
@@ -29,24 +37,47 @@ export default function Post() {
       });
       return;
     }
-
-    //Making a new post
-    const colletionRef = collection(db, "posts");
-    await addDoc(colletionRef, {
-      ...post,
-      timestamp: serverTimestamp(),
-      user: user.uid,
-      avatar: user.photoURL,
-      username: user.displayName,
-    });
-    setPost({ description: "" });
-    return route.push("/");
+    //Check if edit is clicked or post
+    if (post?.hasOwnProperty("id")) {
+      const docRef = doc(db, "posts", post.id);
+      const updatedPost = { ...post, timestamp: serverTimestamp() };
+      await updateDoc(docRef, updatedPost);
+      return route.push("/");
+    } else {
+      //Making a new post
+      const colletionRef = collection(db, "posts");
+      await addDoc(colletionRef, {
+        ...post,
+        timestamp: serverTimestamp(),
+        user: user.uid,
+        avatar: user.photoURL,
+        username: user.displayName,
+      });
+      setPost({ description: "" });
+      return route.push("/");
+    }
   };
+
+  //Checking user is logged in
+  const checkUser = async () => {
+    if (loading) return;
+    if (!user) route.push("auth.login");
+    // Checking if user is posting a new post or editing an existing post by checking if the (id) is available
+    if (routeData.id) {
+      setPost({ description: routeData.description, id: routeData.id });
+    }
+  };
+
+  useEffect(() => {
+    checkUser();
+  }, [user, loading]);
 
   return (
     <div className="my-20 p-12 shadow-lg rounded-lg max-w-md mx-auto">
       <form onSubmit={submitPost}>
-        <h1 className="text-2xl font-bold">Create a new post</h1>
+        <h1 className="text-2xl font-bold">
+          {post.hasOwnProperty("id") ? "Edit your post" : "Create a new post"}
+        </h1>
         <div className="py-2">
           <h3 className="text-lg font-medium py-y">Description</h3>
           <textarea
