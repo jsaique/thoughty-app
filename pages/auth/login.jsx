@@ -9,6 +9,7 @@ import { auth } from "@/utils/firebase";
 import { useRouter } from "next/router";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useEffect } from "react";
+import { toast } from "react-toastify";
 
 export default function Login() {
   const route = useRouter();
@@ -20,7 +21,11 @@ export default function Login() {
       const res = await signInWithPopup(auth, goggleProvider);
       route.push("/");
     } catch (error) {
-      console.log(error);
+      if (error.code === "auth/popup-closed-by-user") {
+        console.log("Popup closed by user");
+      } else {
+        console.log(error);
+      }
     }
   };
 
@@ -37,8 +42,12 @@ export default function Login() {
   useEffect(() => {
     if (user) {
       route.push("/");
+      toast.success("Logged in", {
+        position: toast.POSITION.TOP_CENTER,
+        autoClose: 1500,
+      });
     } else {
-      console.log("login");
+      route.push("/auth/login");
     }
   }, [user]);
 

@@ -59,7 +59,7 @@ export default function Details() {
   useEffect(() => {
     if (!router.isReady) return;
     getComments();
-  }, [allMessages]);
+  }, [router.isReady]);
 
   return (
     <div>
