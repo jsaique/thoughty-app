@@ -28,8 +28,8 @@ export default function Nav() {
               </Link>
               <Link href="/dashboard">
                 {!user.photoURL ? (
-                  <button className="w-full p-2 text-lg font-medium rounded-full bg-cyan-500">
-                    Demo
+                  <button className="w-12 aspect-square text-white text-lg font-medium rounded-full bg-cyan-500">
+                    D
                   </button>
                 ) : (
                   <img

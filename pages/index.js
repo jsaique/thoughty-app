@@ -3,6 +3,7 @@ import { db } from "@/utils/firebase";
 import Head from "next/head";
 import Message from "@/components/message";
 import { collection, onSnapshot, orderBy, query } from "firebase/firestore";
+import Link from "next/link";
 
 export default function Home() {
   //Creating the state with all posts
@@ -38,7 +39,14 @@ export default function Home() {
         <h2>See what other people are saying</h2>
         {/* <Message /> */}
         {allPosts.map((post) => (
-          <Message {...post} key={post.id} />
+          <Message {...post} key={post.id}>
+            {/* When the comment btn is clicked it will take you to the comments(post.id) */}
+            <Link href={{ pathname: `/${post.id}`, query: { ...post } }}>
+              <button>
+                {post.comments?.length > 0 ? post.comments?.length : 0} comments
+              </button>
+            </Link>
+          </Message>
         ))}
       </div>
     </>

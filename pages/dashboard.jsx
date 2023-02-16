@@ -25,7 +25,6 @@ export default function Dashboard() {
     if (loading) return;
     //No User logged in redirect to login page
     if (!user) return route.push("/auth/login");
-    console.log(user);
     //Showing logged in users post in dashboard
     const collectionRef = collection(db, "posts");
     const postQuery = query(collectionRef, where("user", "==", user.uid));
