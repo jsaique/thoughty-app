@@ -2,15 +2,20 @@ import Link from "next/link";
 import { auth } from "@/utils/firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { BsDisplayFill } from "react-icons/bs";
+import Tippy from "@tippyjs/react";
+import "tippy.js/dist/tippy.css";
+import "tippy.js/animations/scale.css";
 
 export default function Nav() {
   const [user, loading] = useAuthState(auth);
   return (
     <div>
       <nav className="flex justify-between items-center py-10">
-        <Link href="/">
-          <button className="text-lg font-medium">Thoughty</button>
-        </Link>
+        <Tippy animation={"scale"} content={"My Feed"}>
+          <Link href="/">
+            <button className="text-lg font-medium py-2">Thoughty</button>
+          </Link>
+        </Tippy>
         <ul className="flex items-center gap-10">
           {!user && (
             <Link href={"/auth/login"}>
@@ -21,24 +26,28 @@ export default function Nav() {
           )}
           {user && (
             <div className="flex items-center gap-6">
-              <Link href="/post">
-                <button className="font-medium bg-cyan-500 text-white py-2 px-4 rounded-md text-sm">
-                  Post
-                </button>
-              </Link>
-              <Link href="/dashboard">
-                {!user.photoURL ? (
-                  <button className="w-12 aspect-square text-white text-lg font-medium rounded-full bg-cyan-500">
-                    D
+              <Tippy animation={"scale"} content={"Post your thoughts"}>
+                <Link href="/post">
+                  <button className="font-medium bg-cyan-500 text-white py-2 px-4 rounded-md text-base">
+                    Post
                   </button>
-                ) : (
-                  <img
-                    className="w-10 rounded-full cursor-pointer"
-                    src={user.photoURL}
-                    alt={user.displayName}
-                  />
-                )}
-              </Link>
+                </Link>
+              </Tippy>
+              <Tippy animation={"scale"} content={"My post"}>
+                <Link href="/dashboard">
+                  {!user.photoURL ? (
+                    <button className="w-12 aspect-square text-white text-lg font-medium rounded-full bg-cyan-500">
+                      D
+                    </button>
+                  ) : (
+                    <img
+                      className="w-10 rounded-full cursor-pointer"
+                      src={user.photoURL}
+                      alt={user.displayName}
+                    />
+                  )}
+                </Link>
+              </Tippy>
             </div>
           )}
         </ul>
