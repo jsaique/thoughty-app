@@ -1,7 +1,7 @@
 import { FcGoogle } from "react-icons/fc";
 import { BsDisplayFill } from "react-icons/bs";
 import {
-  signInWithPopup,
+  signInWithRedirect,
   GoogleAuthProvider,
   signInAnonymously,
 } from "firebase/auth";
@@ -18,7 +18,7 @@ export default function Login() {
   const goggleProvider = new GoogleAuthProvider();
   const GoogleLogin = async () => {
     try {
-      const res = await signInWithPopup(auth, goggleProvider);
+      const res = await signInWithRedirect(auth, goggleProvider);
       route.push("/");
     } catch (error) {
       if (error.code === "auth/popup-closed-by-user") {
