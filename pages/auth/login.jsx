@@ -21,11 +21,7 @@ export default function Login() {
       const res = await signInWithRedirect(auth, goggleProvider);
       route.push("/");
     } catch (error) {
-      if (error.code === "auth/popup-closed-by-user") {
-        console.log("Popup closed by user");
-      } else {
-        console.log(error);
-      }
+      console.log(error);
     }
   };
 
@@ -44,7 +40,7 @@ export default function Login() {
       route.push("/");
       toast.success("Logged in", {
         position: toast.POSITION.TOP_CENTER,
-        autoClose: 1500,
+        autoClose: 2000,
       });
     } else {
       console.log("login");
