@@ -47,7 +47,7 @@ export default function Login() {
         autoClose: 1500,
       });
     } else {
-      route.push("/auth/login");
+      console.log("login");
     }
   }, [user]);
 
