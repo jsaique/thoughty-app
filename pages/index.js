@@ -43,7 +43,7 @@ export default function Home() {
             <Link href={{ pathname: `/${post.id}`, query: { ...post } }}>
               <button className="p-2 bg-cyan-500 rounded-lg text-white">
                 {post.comments?.length > 0 ? post.comments?.length : 0}{" "}
-                {post.comments?.length > 0 ? "comments" : "comment"}
+                {post.comments?.length > 1 ? "comments" : "comment"}
               </button>
             </Link>
           </Message>
