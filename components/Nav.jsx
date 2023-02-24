@@ -13,7 +13,9 @@ export default function Nav() {
       <nav className="flex justify-between items-center py-10">
         <Tippy animation={"scale"} content={"My Feed"}>
           <Link href="/">
-            <button className="text-lg font-medium py-2">Thoughty</button>
+            <button className="font-bold text-xl bg-clip-text text-transparent bg-gradient-to-r from-amber-600 to-violet-600">
+              Thoughty
+            </button>
           </Link>
         </Tippy>
         <ul className="flex items-center gap-10">
