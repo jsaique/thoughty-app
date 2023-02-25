@@ -54,7 +54,7 @@ export default function Dashboard() {
           return (
             <Message {...post} key={post.id}>
               <div className="flex gap-4">
-                <button className="text-pink-600 flex items-center justify-center gap-2 py-2 text-sm">
+                <button className="text-amber-600 flex items-center justify-center gap-2 py-2 text-sm">
                   <BsTrash2Fill
                     onClick={() => deletePost(post.id)}
                     className="text-2xl"
@@ -63,7 +63,7 @@ export default function Dashboard() {
                 </button>
                 {/* Editing the post with Link/pathname(so we can pass data)*/}
                 <Link href={{ pathname: "/post", query: post }}>
-                  <button className="text-teal-600 flex items-center justify-center gap-2 py-2 text-sm">
+                  <button className="text-violet-700 flex items-center justify-center gap-2 py-2 text-sm">
                     <AiFillEdit className="text-2xl" />
                     Edit
                   </button>

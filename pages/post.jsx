@@ -91,10 +91,10 @@ export default function Post() {
           <textarea
             value={post.description}
             onChange={(e) => setPost({ ...post, description: e.target.value })}
-            className="bg-gray-800 h-48 w-full text-white rounded-lg p-2 text-sm"
+            className="bg-stone-200 h-48 w-full text-stone-600-300 rounded-lg p-2 text-sm"
           ></textarea>
           <p
-            className={`text-cyan-600 font-medium text-sm ${
+            className={`text-violet-700 font-medium text-sm ${
               post.description.length > 300 ? "text-red-600" : ""
             }`}
           >
@@ -103,7 +103,7 @@ export default function Post() {
         </div>
         <button
           type="submit"
-          className="w-full bg-cyan-600 text-white font-medium p-2 my-2 rounded-lg text-sm"
+          className="w-full bg-violet-700 text-white font-medium p-2 my-2 rounded-lg text-sm"
         >
           Submit
         </button>

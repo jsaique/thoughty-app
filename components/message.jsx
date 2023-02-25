@@ -3,7 +3,7 @@ import { BsDisplayFill } from "react-icons/bs";
 
 export default function Message({ children, avatar, username, description }) {
   return (
-    <div className="bg-white p-8 border-b-2 rounded-lg">
+    <div className="p-8 border-b-2 shadow-lg rounded-lg my-2">
       <div className="flex items-center gap-2">
         {!avatar ? (
           <BsDisplayFill />

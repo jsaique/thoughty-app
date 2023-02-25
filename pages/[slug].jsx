@@ -91,7 +91,7 @@ export default function Details() {
               >
                 <div className="flex items-center gap-2 mb-4">
                   {!message.avatar ? (
-                    <button className="w-12 aspect-square text-white text-lg font-medium rounded-full bg-cyan-500">
+                    <button className="w-12 aspect-square text-white text-lg font-medium rounded-full bg-violet-700">
                       D
                     </button>
                   ) : (

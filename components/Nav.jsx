@@ -21,7 +21,7 @@ export default function Nav() {
         <ul className="flex items-center gap-10">
           {!user && (
             <Link href={"/auth/login"}>
-              <button className="py-2 px-4 text-sm bg-cyan-500 text-white rounded-lg font-medium ml-8">
+              <button className="py-2 px-4 text-sm bg-violet-700 text-white rounded-lg font-medium ml-8">
                 Login
               </button>
             </Link>
@@ -30,7 +30,7 @@ export default function Nav() {
             <div className="flex items-center gap-6">
               <Tippy animation={"scale"} content={"Post your thoughts"}>
                 <Link href="/post">
-                  <button className="font-medium bg-cyan-500 text-white py-2 px-4 rounded-md text-base">
+                  <button className="font-medium bg-violet-700 text-white py-2 px-4 rounded-md text-base">
                     Post
                   </button>
                 </Link>
@@ -38,7 +38,7 @@ export default function Nav() {
               <Tippy animation={"scale"} content={"My post"}>
                 <Link href="/dashboard">
                   {!user.photoURL ? (
-                    <button className="w-12 aspect-square text-white text-lg font-medium rounded-full bg-cyan-500">
+                    <button className="w-12 aspect-square text-white text-lg font-medium rounded-full bg-violet-700">
                       D
                     </button>
                   ) : (
